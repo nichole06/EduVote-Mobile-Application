@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">EduVote</string>
+    <string name="open_menu">Open</string>
+    <string name="close_menu">Close</string>
+
+    <string-array name="position_dropdown_items">
+        <item>Select a Position</item>
+        <item>Governor</item>
+        <item>Vice Governor</item>
+        <item>Secretary</item>
+        <item>Treasurer</item>
+        <item>Budget</item>
+        <item>Auditor</item>
+        <item>P.I.O</item>
+        <item>Fourth Year Representative</item>
+        <item>Third Year Representative</item>
+        <item>Second Year Representative</item>
+    </string-array>
+
+    <string-array name="position_dropdown_items_delete">
+        <item>DELETE CANDIDATE -</item>
+        <item>Governor</item>
+        <item>Vice Governor</item>
+        <item>Secretary</item>
+        <item>Treasurer</item>
+        <item>Budget</item>
+        <item>Auditor</item>
+        <item>P.I.O</item>
+        <item>Fourth Year Representative</item>
+        <item>Third Year Representative</item>
+        <item>Second Year Representative</item>
+    </string-array>
+</resources>

@@ -1,0 +1,548 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/green"
+    tools:context=".addPartylist">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="49dp"
+        android:layout_height="47dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.044"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.036"
+        app:srcCompat="@drawable/eduvote_logo" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_extra_bold"
+        android:text="@string/app_name"
+        android:textColor="@color/white"
+        android:textSize="23dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.041" />
+
+    <LinearLayout
+        android:id="@+id/imageView5"
+        android:layout_width="411dp"
+        android:layout_height="580dp"
+        android:background="@drawable/main_rect"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/partyName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:fontFamily="@font/poppins_bold"
+                    android:text="[Partylist Name]"
+                    android:textColor="@color/green"
+                    android:textSize="30sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/addCandidate"
+                    android:layout_width="160dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="28dp"
+                    android:background="@drawable/button_background"
+                    android:fontFamily="@font/poppins_semi_bold"
+                    android:text="Add Candidate +"
+                    android:textColor="@color/white"
+                    android:textSize="13sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/partyName" />
+
+                <Spinner
+                    android:id="@+id/deleteCandidate"
+                    android:layout_width="160dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="28dp"
+                    android:layout_marginEnd="30dp"
+                    android:spinnerMode="dropdown"
+                    android:background="@drawable/button_background"
+                    android:text="Delete Candidate"
+                    android:textColor="@color/white"
+                    android:gravity="center"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/addCandidate"
+                    app:layout_constraintTop_toBottomOf="@+id/partyName" />
+
+                <TextView
+                    android:id="@+id/text1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="28dp"
+                    android:layout_marginTop="44dp"
+                    android:fontFamily="@font/poppins_semi_bold"
+                    android:text="Governor"
+                    android:textColor="@color/green"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/addCandidate" />
+
+                <EditText
+                    android:id="@+id/editTextText"
+                    android:layout_width="350dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/edit_text_background"
+                    android:ems="10"
+                    android:fontFamily="@font/poppins_bold"
+                    android:paddingLeft="15dp"
+                    android:textColor="@color/green"
+                    android:textSize="17sp"
+                    android:enabled="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text1" />
+
+                <TextView
+                    android:id="@+id/governor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/poppins_semi_bold"
+                    android:text="Empty"
+                    android:textColor="@color/grey"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/editTextText"
+                    app:layout_constraintStart_toStartOf="@+id/editTextText"
+                    app:layout_constraintTop_toTopOf="@+id/editTextText"
+                    android:enabled="false" />
+
+                <TextView
+                    android:id="@+id/text2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="28dp"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/poppins_semi_bold"
+                    android:text="Vice Governor"
+                    android:textColor="@color/green"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextText" />
+
+                <EditText
+                    android:id="@+id/editTextText1"
+                    android:layout_width="350dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/edit_text_background"
+                    android:ems="10"
+                    android:fontFamily="@font/poppins_bold"
+                    android:inputType="text"
+                    android:paddingLeft="15dp"
+                    android:textColor="@color/green"
+                    android:textSize="17sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text2"
+                    android:enabled="false" />
+
+                <TextView
+                    android:id="@+id/viceGov"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/poppins_semi_bold"
+                    android:text="Empty"
+                    android:textColor="@color/grey"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/editTextText1"
+                    app:layout_constraintStart_toStartOf="@+id/editTextText1"
+                    app:layout_constraintTop_toTopOf="@+id/editTextText1" />
+
+                <TextView
+                    android:id="@+id/text5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="28dp"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/poppins_semi_bold"
+                    android:text="Secretary"
+                    android:textColor="@color/green"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextText1" />
+
+                <EditText
+                    android:id="@+id/editTextText3"
+                    android:layout_width="350dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/edit_text_background"
+                    android:ems="10"
+                    android:fontFamily="@font/poppins_bold"
+                    android:inputType="text"
+                    android:paddingLeft="15dp"
+                    android:textColor="@color/green"
+                    android:textSize="17sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.491"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text5"
+                    android:enabled="false" />
+
+                <TextView
+                    android:id="@+id/secretary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/poppins_semi_bold"
+                    android:text="Empty"
+                    android:textColor="@color/grey"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/editTextText3"
+                    app:layout_constraintStart_toStartOf="@+id/editTextText3"
+                    app:layout_constraintTop_toTopOf="@+id/editTextText3" />
+
+                <TextView
+                    android:id="@+id/text6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="28dp"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/poppins_semi_bold"
+                    android:text="Treasurer"
+                    android:textColor="@color/green"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextText3" />
+
+                <EditText
+                    android:id="@+id/editTextText4"
+                    android:layout_width="350dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/edit_text_background"
+                    android:ems="10"
+                    android:fontFamily="@font/poppins_bold"
+                    android:inputType="text"
+                    android:paddingLeft="15dp"
+                    android:textColor="@color/green"
+                    android:textSize="17sp"
+                    android:enabled="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.491"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text6" />
+
+                <TextView
+                    android:id="@+id/treasurer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/poppins_semi_bold"
+                    android:text="Empty"
+                    android:textColor="@color/grey"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/editTextText4"
+                    app:layout_constraintStart_toStartOf="@+id/editTextText4"
+                    app:layout_constraintTop_toTopOf="@+id/editTextText4" />
+
+                // budget
+
+                <TextView
+                    android:id="@+id/text7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="28dp"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/poppins_semi_bold"
+                    android:text="Budget"
+                    android:textColor="@color/green"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextText4" />
+
+                <EditText
+                    android:id="@+id/editTextText5"
+                    android:layout_width="350dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/edit_text_background"
+                    android:ems="10"
+                    android:fontFamily="@font/poppins_bold"
+                    android:inputType="text"
+                    android:paddingLeft="15dp"
+                    android:textColor="@color/green"
+                    android:textSize="17sp"
+                    android:enabled="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.491"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text7" />
+
+                <TextView
+                    android:id="@+id/budget"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/poppins_semi_bold"
+                    android:text="Empty"
+                    android:textColor="@color/grey"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/editTextText5"
+                    app:layout_constraintStart_toStartOf="@+id/editTextText5"
+                    app:layout_constraintTop_toTopOf="@+id/editTextText5" />
+
+                // auditor
+
+                <TextView
+                    android:id="@+id/text8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="28dp"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/poppins_semi_bold"
+                    android:text="Auditor"
+                    android:textColor="@color/green"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextText5" />
+
+                <EditText
+                    android:id="@+id/editTextText6"
+                    android:layout_width="350dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/edit_text_background"
+                    android:ems="10"
+                    android:fontFamily="@font/poppins_bold"
+                    android:inputType="text"
+                    android:paddingLeft="15dp"
+                    android:textColor="@color/green"
+                    android:textSize="17sp"
+                    android:enabled="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.491"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text8" />
+
+                <TextView
+                    android:id="@+id/auditor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/poppins_semi_bold"
+                    android:text="Empty"
+                    android:textColor="@color/grey"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/editTextText6"
+                    app:layout_constraintStart_toStartOf="@+id/editTextText6"
+                    app:layout_constraintTop_toTopOf="@+id/editTextText6" />
+
+                // pio
+
+                <TextView
+                    android:id="@+id/text9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="28dp"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/poppins_semi_bold"
+                    android:text="P.I.O"
+                    android:textColor="@color/green"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextText6" />
+
+                <EditText
+                    android:id="@+id/editTextText7"
+                    android:layout_width="350dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/edit_text_background"
+                    android:ems="10"
+                    android:fontFamily="@font/poppins_bold"
+                    android:inputType="text"
+                    android:paddingLeft="15dp"
+                    android:textColor="@color/green"
+                    android:textSize="17sp"
+                    android:enabled="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.491"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text9" />
+
+                <TextView
+                    android:id="@+id/pio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/poppins_semi_bold"
+                    android:text="Empty"
+                    android:textColor="@color/grey"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/editTextText7"
+                    app:layout_constraintStart_toStartOf="@+id/editTextText7"
+                    app:layout_constraintTop_toTopOf="@+id/editTextText7" />
+
+                // 4th year
+
+                <TextView
+                    android:id="@+id/text10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="28dp"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/poppins_semi_bold"
+                    android:text="4th Year Representative"
+                    android:textColor="@color/green"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextText7" />
+
+                <EditText
+                    android:id="@+id/editTextText8"
+                    android:layout_width="350dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/edit_text_background"
+                    android:ems="10"
+                    android:fontFamily="@font/poppins_bold"
+                    android:inputType="text"
+                    android:paddingLeft="15dp"
+                    android:textColor="@color/green"
+                    android:textSize="17sp"
+                    android:enabled="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.491"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text10" />
+
+                <TextView
+                    android:id="@+id/fourthYearRep"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/poppins_semi_bold"
+                    android:text="Empty"
+                    android:textColor="@color/grey"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/editTextText8"
+                    app:layout_constraintStart_toStartOf="@+id/editTextText8"
+                    app:layout_constraintTop_toTopOf="@+id/editTextText8" />
+
+                // 3rd year rep
+
+                <TextView
+                    android:id="@+id/text11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="28dp"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/poppins_semi_bold"
+                    android:text="3rd Year Representative"
+                    android:textColor="@color/green"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextText8" />
+
+                <EditText
+                    android:id="@+id/editTextText9"
+                    android:layout_width="350dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/edit_text_background"
+                    android:ems="10"
+                    android:fontFamily="@font/poppins_bold"
+                    android:inputType="text"
+                    android:paddingLeft="15dp"
+                    android:textColor="@color/green"
+                    android:textSize="17sp"
+                    android:enabled="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.491"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text11" />
+
+                <TextView
+                    android:id="@+id/thirdYearRep"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/poppins_semi_bold"
+                    android:text="Empty"
+                    android:textColor="@color/grey"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/editTextText9"
+                    app:layout_constraintStart_toStartOf="@+id/editTextText9"
+                    app:layout_constraintTop_toTopOf="@+id/editTextText9" />
+
+                // 2nd
+
+                <TextView
+                    android:id="@+id/text12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="28dp"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/poppins_semi_bold"
+                    android:text="2nd Year Representative"
+                    android:textColor="@color/green"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextText9" />
+
+                <EditText
+                    android:id="@+id/editTextText10"
+                    android:layout_width="350dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/edit_text_background"
+                    android:ems="10"
+                    android:fontFamily="@font/poppins_bold"
+                    android:inputType="text"
+                    android:paddingLeft="15dp"
+                    android:textColor="@color/green"
+                    android:textSize="17sp"
+                    android:enabled="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.491"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text12" />
+
+                <TextView
+                    android:id="@+id/secondYearRep"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/poppins_semi_bold"
+                    android:text="Empty"
+                    android:textColor="@color/grey"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/editTextText10"
+                    app:layout_constraintStart_toStartOf="@+id/editTextText10"
+                    app:layout_constraintTop_toTopOf="@+id/editTextText10" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+    </LinearLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

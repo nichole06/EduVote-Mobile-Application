@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "791690944719",
+    "project_id": "edu-vote-project-id",
+    "storage_bucket": "edu-vote-project-id.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:791690944719:android:2ddc7c8fa2d83b37c8d7ba",
+        "android_client_info": {
+          "package_name": "com.example.eduvote"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyByNF4YSOmoeMLVL0bsJtNto0NHUS8smvQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

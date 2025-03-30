@@ -1,0 +1,24 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <!-- Position Name -->
+    <TextView
+        android:id="@+id/positionName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Governor"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:paddingBottom="4dp"/>
+
+    <!-- Candidates RecyclerView (Inside Position) -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/candidatesRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:nestedScrollingEnabled="false"/>
+</LinearLayout>
