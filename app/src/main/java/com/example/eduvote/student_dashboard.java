@@ -3,6 +3,7 @@ package com.example.eduvote;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -11,11 +12,16 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
+import androidx.core.view.GravityCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,11 +30,53 @@ import com.google.firebase.database.ValueEventListener;
 
 public class student_dashboard extends AppCompatActivity {
 
+    DrawerLayout drawerLayout;
+    NavigationView navigationView;
+    Toolbar toolbar;
+    ActionBarDrawerToggle actionBarDrawerToggle;
+    ImageView hamburgerMenu;  // Reference to the button
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_student_dashboard);
+
+        drawerLayout = findViewById(R.id.student_drawer_layout);
+        navigationView = findViewById(R.id.student_nav);
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open_menu, R.string.close_menu);
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
+
+        hamburgerMenu = findViewById(R.id.hamburgerMenu);
+
+        hamburgerMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
+
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                int id = item.getItemId();
+
+                if (id == R.id.dashboard) {
+                    Log.i("MENU_DRAWER_TAG", "Dashboard is clicked");
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                } else if (id == R.id.logout) {
+                    Log.i("MENU_DRAWER_TAG", "Logout is clicked");
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                    Intent intent = new Intent(student_dashboard.this, MainActivity.class);
+                    startActivity(intent);
+                    Toast.makeText(student_dashboard.this, "You have successfully logged out.", Toast.LENGTH_SHORT).show();
+                }
+
+                return true;
+            }
+        });
 
         String studentID = getIntent().getStringExtra("studentID");
         String studentName = getIntent().getStringExtra("studentName");

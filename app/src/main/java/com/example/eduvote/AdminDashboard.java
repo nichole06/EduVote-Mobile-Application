@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.activity.EdgeToEdge;
@@ -84,6 +85,9 @@ public class AdminDashboard extends AppCompatActivity {
                 } else if (id == R.id.logout) {
                     Log.i("MENU_DRAWER_TAG", "Logout is clicked");
                     drawerLayout.closeDrawer(GravityCompat.START);
+                    Intent intent = new Intent(AdminDashboard.this, MainActivity.class);
+                    startActivity(intent);
+                    Toast.makeText(AdminDashboard.this, "You have successfully logged out.", Toast.LENGTH_SHORT).show();
                 }
 
                 return true;
