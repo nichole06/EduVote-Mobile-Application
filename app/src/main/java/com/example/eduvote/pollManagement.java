@@ -34,6 +34,8 @@ public class pollManagement extends AppCompatActivity {
     RecyclerView recyclerView;
     PartyListMainAdapter partyListMainAdapter;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +53,7 @@ public class pollManagement extends AppCompatActivity {
 
                 Intent intent = new Intent(pollManagement.this, addPartylist.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -59,6 +62,7 @@ public class pollManagement extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(pollManagement.this, startEventManager.class);
                 startActivity(intent);
+                finish();
             }
         });
 

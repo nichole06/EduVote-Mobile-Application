@@ -37,7 +37,7 @@ public class VotingResult extends AppCompatActivity {
         resultsMap = new HashMap<>();
 
         DatabaseReference databaseForCurrentEvent = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference currentEventReference = databaseForCurrentEvent.child("currentEvent");
+        DatabaseReference currentEventReference = databaseForCurrentEvent.child("previousEvent");
 
         currentEventReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

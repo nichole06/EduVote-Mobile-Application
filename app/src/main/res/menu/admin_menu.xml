@@ -7,8 +7,9 @@
             android:icon="@drawable/baseline_dashboard_24"/>
         <item android:id="@+id/pollManagement" android:title="Poll Management"
             android:icon="@drawable/baseline_poll_24"/>
+        <item android:id="@+id/viewPreviousEventResult" android:title="View Previous Event Result"
+            android:icon="@drawable/baseline_calendar_view_day_24"/>
         <item android:id="@+id/logout" android:title="Logout"
             android:icon="@drawable/baseline_backspace_24"/>
-
     </group>
 </menu>

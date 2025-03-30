@@ -24,6 +24,14 @@ import com.google.firebase.database.ValueEventListener;
 public class startEventManager extends AppCompatActivity {
 
     @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, pollManagement.class);
+        startActivity(intent);
+        finish(); // Removes SettingsActivity from memory
+        overridePendingTransition(0, 0);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
@@ -42,7 +50,7 @@ public class startEventManager extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                         String eventName = eventNameEditText.getText().toString().replace(" ", "").trim();
-                        if (snapshot.exists()) {
+                        if (snapshot.exists() && snapshot.getChildrenCount() >= 2) {
                             database.child("VotingEvents").child(eventName).setValue(snapshot.getValue())
                                     .addOnSuccessListener(aVoid -> {
                                         database.child("isEventStarted").setValue(true);
@@ -50,12 +58,13 @@ public class startEventManager extends AppCompatActivity {
                                         database.child("currentEvent").setValue(eventName);
                                         Intent intent = new Intent(startEventManager.this, pollManagement.class);
                                         startActivity(intent);
+                                        finish();
                                     }).addOnFailureListener(aVoid -> {
                                         Toast.makeText(startEventManager.this, "Failed to start the event", Toast.LENGTH_SHORT).show();
                                     });
 
                         }else {
-                            Toast.makeText(startEventManager.this, "There is no party list that has been added yet", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(startEventManager.this, "There should be at least 2 or more partylist to start an event", Toast.LENGTH_SHORT).show();
                         }
                     }
 

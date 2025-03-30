@@ -34,7 +34,12 @@ public class student_dashboard extends AppCompatActivity {
     NavigationView navigationView;
     Toolbar toolbar;
     ActionBarDrawerToggle actionBarDrawerToggle;
+    String previousEvent;
     ImageView hamburgerMenu;  // Reference to the button
+
+    public void onBackPressed() {
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,14 +47,30 @@ public class student_dashboard extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_student_dashboard);
 
+        String studentID = getIntent().getStringExtra("studentID");
+        String studentName = getIntent().getStringExtra("studentName");
+
+        DatabaseReference database = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference previousEventRef = database.child("previousEvent");
+
+        previousEventRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                previousEvent = snapshot.getValue(String.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         drawerLayout = findViewById(R.id.student_drawer_layout);
         navigationView = findViewById(R.id.student_nav);
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open_menu, R.string.close_menu);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
-
         hamburgerMenu = findViewById(R.id.hamburgerMenu);
-
         hamburgerMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,14 +93,25 @@ public class student_dashboard extends AppCompatActivity {
                     Intent intent = new Intent(student_dashboard.this, MainActivity.class);
                     startActivity(intent);
                     Toast.makeText(student_dashboard.this, "You have successfully logged out.", Toast.LENGTH_SHORT).show();
+                } else if(id == R.id.viewPreviousEventResult) {
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                    if(previousEvent != null && !previousEvent.isEmpty()){
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        Intent intent = new Intent(student_dashboard.this, VotingResult.class);
+                        intent.putExtra("studentID", studentID);
+                        intent.putExtra("studentName", studentName);
+                        startActivity(intent);
+                    } else {
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        Toast.makeText(student_dashboard.this, "There is no previous event.", Toast.LENGTH_SHORT).show();
+                    }
                 }
 
                 return true;
             }
         });
 
-        String studentID = getIntent().getStringExtra("studentID");
-        String studentName = getIntent().getStringExtra("studentName");
+
 
         DatabaseReference isEventStartedRef = FirebaseDatabase.getInstance().getReference().child("isEventStarted");
         if (studentID == null) {
@@ -90,7 +122,6 @@ public class student_dashboard extends AppCompatActivity {
         }
         DatabaseReference isVoted = FirebaseDatabase.getInstance().getReference().child("students").child("studentID").child(studentID);
         Button voteBtn = findViewById(R.id.voteBtn);
-        Button viewResult = findViewById(R.id.viewButton);
         TextView text1 = findViewById(R.id.text1);
         TextView text2 = findViewById(R.id.text2);
         TextView text3 = findViewById(R.id.text3);
@@ -149,15 +180,15 @@ public class student_dashboard extends AppCompatActivity {
             }
         });
 
-        viewResult.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(student_dashboard.this, VotingResult.class);
-                intent.putExtra("studentID", studentID);
-                intent.putExtra("studentName", studentName);
-                startActivity(intent);
-            }
-        });
+//        viewResult.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(student_dashboard.this, VotingResult.class);
+//                intent.putExtra("studentID", studentID);
+//                intent.putExtra("studentName", studentName);
+//                startActivity(intent);
+//            }
+//        });
 
     }
 }

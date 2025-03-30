@@ -87,11 +87,12 @@ public class MainActivity extends AppCompatActivity {
                             intent.putExtra("studentID", studentID);
                             intent.putExtra("studentName", studentName);
                             startActivity(intent);
+                            finish();
                             Toast.makeText(MainActivity.this, "Logged in Successfully!", Toast.LENGTH_SHORT).show();
                         }else {
                             Log.d("Status", "Student not found ");
 
-                            if (result.getContents() != null) {
+                            if (result.getContents() == null) {
                                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                                 builder.setTitle("Result");
                                 builder.setMessage("Student not found");

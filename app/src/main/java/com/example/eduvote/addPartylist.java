@@ -21,6 +21,14 @@ import java.util.Map;
 public class addPartylist extends AppCompatActivity {
 
     @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, pollManagement.class);
+        startActivity(intent);
+        finish(); // Removes SettingsActivity from memory
+        overridePendingTransition(0, 0);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
@@ -46,6 +54,7 @@ public class addPartylist extends AppCompatActivity {
                 Toast.makeText(this, "Partylist has been added successfully!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(addPartylist.this, pollManagement.class);
                 startActivity(intent);
+                finish();
             }).addOnFailureListener(er->{
                 Toast.makeText(this, ""+er, Toast.LENGTH_SHORT).show();
             });

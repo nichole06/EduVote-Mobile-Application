@@ -1,12 +1,10 @@
 package com.example.eduvote;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,13 +14,10 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import com.example.eduvote.R;
 
-import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.Firebase;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -37,6 +32,8 @@ public class AdminDashboard extends AppCompatActivity {
     ActionBarDrawerToggle actionBarDrawerToggle;
     ImageView hamburgerMenu;  // Reference to the button
 
+    String previousEvent;
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
@@ -47,10 +44,37 @@ public class AdminDashboard extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed() {
+        // Remove or comment out the default back button behavior
+        // super.onBackPressed();
+
+        // Implement your custom back navigation
+
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_admin_dashboard);
+
+        DatabaseReference database = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference previousEventRef = database.child("previousEvent");
+
+        previousEventRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                previousEvent = snapshot.getValue(String.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+
 
         // Initialize the DrawerLayout, NavigationView, and other components
         drawerLayout = findViewById(R.id.admin_drawer_layout);
@@ -58,7 +82,6 @@ public class AdminDashboard extends AppCompatActivity {
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open_menu, R.string.close_menu);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
-
         hamburgerMenu = findViewById(R.id.hamburgerMenu);
 
         hamburgerMenu.setOnClickListener(new View.OnClickListener() {
@@ -75,28 +98,31 @@ public class AdminDashboard extends AppCompatActivity {
                 int id = item.getItemId();
 
                 if (id == R.id.dashboard) {
-                    Log.i("MENU_DRAWER_TAG", "Dashboard is clicked");
                     drawerLayout.closeDrawer(GravityCompat.START);
                 } else if (id == R.id.pollManagement) {
-                    Log.i("MENU_DRAWER_TAG", "Poll Management is clicked");
                     Intent intent = new Intent(AdminDashboard.this, pollManagement.class);
                     startActivity(intent);
                     drawerLayout.closeDrawer(GravityCompat.START);
-                } else if (id == R.id.logout) {
-                    Log.i("MENU_DRAWER_TAG", "Logout is clicked");
+                }else if (id == R.id.logout) {
                     drawerLayout.closeDrawer(GravityCompat.START);
                     Intent intent = new Intent(AdminDashboard.this, MainActivity.class);
                     startActivity(intent);
                     Toast.makeText(AdminDashboard.this, "You have successfully logged out.", Toast.LENGTH_SHORT).show();
+                } else if (id == R.id.viewPreviousEventResult) {
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                    if(previousEvent != null && !previousEvent.isEmpty()){
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        Intent intent = new Intent(AdminDashboard.this, VotingResult.class);
+                        startActivity(intent);
+                    } else {
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        Toast.makeText(AdminDashboard.this, "There is no previous event.", Toast.LENGTH_SHORT).show();
+                    }
                 }
 
                 return true;
             }
         });
-
-
-
-        DatabaseReference database = FirebaseDatabase.getInstance().getReference();
 
         //Total voters
         TextView totalVotersTextView = findViewById(R.id.totalVoters);
@@ -178,9 +204,6 @@ public class AdminDashboard extends AppCompatActivity {
 
                         }
                     });
-
-
-
                 }
 
             }
@@ -193,4 +216,5 @@ public class AdminDashboard extends AppCompatActivity {
 
 
     }
+
 }

@@ -29,6 +29,7 @@ public class AdminLogin extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(AdminLogin.this, AdminDashboard.class);
                 startActivity(intent);
+                finish();
             }
         });
     }
