@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.activity.EdgeToEdge;
@@ -20,6 +21,12 @@ import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.Firebase;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class AdminDashboard extends AppCompatActivity {
 
@@ -82,5 +89,104 @@ public class AdminDashboard extends AppCompatActivity {
                 return true;
             }
         });
+
+
+
+        DatabaseReference database = FirebaseDatabase.getInstance().getReference();
+
+        //Total voters
+        TextView totalVotersTextView = findViewById(R.id.totalVoters);
+        DatabaseReference studentVotersRef = database.child("students").child("studentID");
+        studentVotersRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                long totalVoters = snapshot.getChildrenCount();
+                totalVotersTextView.setText(String.valueOf(totalVoters));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("TotalVoters", "error: " + error);
+            }
+        });
+
+        //Total Active PartyList
+
+        TextView totalActivePartylist = findViewById(R.id.totalVoters8);
+        DatabaseReference currentEventRef = database.child("currentEvent");
+        currentEventRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String currentEvent = snapshot.getValue(String.class);
+                Log.d("CurrentEvent", "Current Event: " + currentEvent);
+
+                if(currentEvent != null && !currentEvent.isEmpty()){
+                    DatabaseReference totalPartylistRefer = database.child("VotingEvents").child(currentEvent);
+
+                    totalPartylistRefer.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            long totalPartylists = snapshot.getChildrenCount();
+                            totalActivePartylist.setText(String.valueOf(totalPartylists));
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
+
+                    TextView totalVoters6 = findViewById(R.id.totalVoters6);
+                    DatabaseReference database = FirebaseDatabase.getInstance().getReference();
+                    DatabaseReference studentVotersRef = database.child("students").child("studentID");
+
+                    studentVotersRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            long totalVoters = snapshot.getChildrenCount();
+                            long votedStudentCount = 0;
+
+
+
+                            for (DataSnapshot studentVoteSnapshot : snapshot.getChildren()) {
+                                Boolean isVoted = studentVoteSnapshot.child("isVoted").getValue(Boolean.class);
+
+                                if(isVoted != null && isVoted){
+                                    votedStudentCount += 1;
+                                }
+                            }
+
+
+                            float votingParticipationPercentage = ((float) votedStudentCount / totalVoters) * 100;
+                            totalVoters6.setText(String.valueOf(votingParticipationPercentage) + "%");
+
+                            Log.d("VotingParticipation", "TotalVoters: "+totalVoters);
+                            Log.d("VotingParticipation", "TotalStudentVotes: " + votedStudentCount);
+                            Log.d("VotingParticipation", "VotingParticipation: " + votingParticipationPercentage);
+
+
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
+
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("TotalPartyList", "error: " + error);
+            }
+        });
+
+
     }
 }
